@@ -232,7 +232,7 @@ function criaCanos() {
         if(cabecaDoFlappy <= par.canoCeu.y) {
           return true;
         }
-        if(peDoFlappy <= par.canoChao.y) {
+        if(peDoFlappy >= par.canoChao.y) {
           return true;
         }
       }
@@ -267,6 +267,27 @@ function criaCanos() {
   return canos;
 }
 
+function criarPlacar() {
+  const placar = {
+    pontuacao: 0,
+    desenha() {
+      contexto.font = '35px "VT323"';
+      contexto.textAlign = 'right';
+      contexto.fillStyle = 'white';
+      contexto.fillText(`${placar.pontuacao}`, canvas.width -10,35);
+    },
+    atualiza() {
+      const intervaloDeFrames = 20;
+      const passouOIntervalo = frames % intervaloDeFrames === 0;
+
+      if(passouOIntervalo) {
+        placar.pontuacao = placar.pontuacao + 1;
+      }
+    }
+  }
+  return placar;
+}
+
 const Telas = {
   INICIO: {
     inicializa() {
@@ -290,11 +311,15 @@ const Telas = {
 };
 
 Telas.JOGO = {
+  inicializa() {
+    globais.placar = criarPlacar();
+  },
   desenha() {
     planoDeFundo.desenha();
     globais.canos.desenha();
     globais.chao.desenha();
     globais.flappyBird.desenha();
+    globais.placar.desenha();
   },
   click() {
     globais.flappyBird.pula();
@@ -303,6 +328,7 @@ Telas.JOGO = {
     globais.canos.atualiza();
     globais.chao.atualiza();
     globais.flappyBird.atualiza();
+    globais.placar.atualiza();
   }
 }
 

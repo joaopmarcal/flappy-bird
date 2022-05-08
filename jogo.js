@@ -142,6 +142,78 @@ function criarFlappyBird() {
   return flappyBird;
 }
 
+const desenhaMedalhaUm = {
+  sX: 0,
+  sY: 78,
+  w: 45,
+  h: 46,
+  x: 74,
+  y: 136,
+  desenha() {
+    contexto.drawImage(
+      sprites,
+      desenhaMedalhaUm.sX,desenhaMedalhaUm.sY,
+      desenhaMedalhaUm.w,desenhaMedalhaUm.h,
+      desenhaMedalhaUm.x,desenhaMedalhaUm.y,
+      desenhaMedalhaUm.w,desenhaMedalhaUm.h,
+    );
+  }
+}
+
+const desenhaMedalhaDois = {
+  sX: 47,
+  sY: 78,
+  w: 45,
+  h: 46,
+  x: 74,
+  y: 136,
+  desenha() {
+    contexto.drawImage(
+      sprites,
+      desenhaMedalhaDois.sX,desenhaMedalhaDois.sY,
+      desenhaMedalhaDois.w,desenhaMedalhaDois.h,
+      desenhaMedalhaDois.x,desenhaMedalhaDois.y,
+      desenhaMedalhaDois.w,desenhaMedalhaDois.h,
+    );
+  }
+}
+
+const desenhaMedalhaTres = {
+  sX: 0,
+  sY: 123,
+  w: 45,
+  h: 46,
+  x: 74,
+  y: 136,
+  desenha() {
+    contexto.drawImage(
+      sprites,
+      desenhaMedalhaTres.sX,desenhaMedalhaTres.sY,
+      desenhaMedalhaTres.w,desenhaMedalhaTres.h,
+      desenhaMedalhaTres.x,desenhaMedalhaTres.y,
+      desenhaMedalhaTres.w,desenhaMedalhaTres.h,
+    );
+  }
+}
+
+const desenhaMedalhaQuatro = {
+  sX: 47,
+  sY: 123,
+  w: 45,
+  h: 46,
+  x: 74,
+  y: 136,
+  desenha() {
+    contexto.drawImage(
+      sprites,
+      desenhaMedalhaQuatro.sX,desenhaMedalhaQuatro.sY,
+      desenhaMedalhaQuatro.w,desenhaMedalhaQuatro.h,
+      desenhaMedalhaQuatro.x,desenhaMedalhaQuatro.y,
+      desenhaMedalhaQuatro.w,desenhaMedalhaQuatro.h,
+    );
+  }
+}
+
 const mensagemGetReady = {
   sX: 134,
   sY: 0,
@@ -300,7 +372,6 @@ const pontuacaoDoPlacar = {
     }
   },
   desenhaMaiorPontuacao() {
-    console.log(globais.placar);
     if(maiorPontuacao < globais.placar.pontuacao) {
       maiorPontuacao = globais.placar.pontuacao;
     }
@@ -387,6 +458,15 @@ Telas.GAME_OVER = {
     mensagemGameOver.desenha();
     pontuacaoDoPlacar.desenhaPontuacao();
     pontuacaoDoPlacar.desenhaMaiorPontuacao();
+    if(globais.placar.pontuacao > 0 && globais.placar.pontuacao < 15) {
+      desenhaMedalhaUm.desenha();
+    } else if (globais.placar.pontuacao < 25) {
+      desenhaMedalhaDois.desenha();
+    } else if (globais.placar.pontuacao < 99) {
+      desenhaMedalhaTres.desenha();
+    } else {
+      desenhaMedalhaQuatro.desenha();
+    }
   },
   atualiza() {
 

@@ -284,6 +284,39 @@ function criaCanos() {
   return canos;
 }
 
+let maiorPontuacao = 0;
+
+const pontuacaoDoPlacar = {
+  desenhaPontuacao() {
+    contexto.font = '20px "VT323"';
+    contexto.textAlign = 'right';
+    contexto.fillStyle = '#000';
+    if(globais.placar.pontuacao < 10){
+      contexto.fillText(`${globais.placar.pontuacao}`, canvas.width -115,123);
+    } else if (globais.placar.pontuacao < 99) {
+      contexto.fillText(`${globais.placar.pontuacao}`, canvas.width -120,123);
+    } else {
+      contexto.fillText(`${globais.placar.pontuacao}`, canvas.width -125,123);
+    }
+  },
+  desenhaMaiorPontuacao() {
+    console.log(globais.placar);
+    if(maiorPontuacao < globais.placar.pontuacao) {
+      maiorPontuacao = globais.placar.pontuacao;
+    }
+    contexto.font = '20px "VT323"';
+    contexto.textAlign = 'right';
+    contexto.fillStyle = '#000';
+    if(maiorPontuacao > 10){
+      contexto.fillText(`${maiorPontuacao}`, canvas.width -115,163);
+    } else if (maiorPontuacao < 99) {
+      contexto.fillText(`${maiorPontuacao}`, canvas.width -120,163);
+    } else {
+      contexto.fillText(`${maiorPontuacao}`, canvas.width -125,163);
+    }
+  }
+}
+
 function criarPlacar() {
   const placar = {
     pontuacao: 0,
@@ -352,6 +385,8 @@ Telas.JOGO = {
 Telas.GAME_OVER = {
   desenha() {
     mensagemGameOver.desenha();
+    pontuacaoDoPlacar.desenhaPontuacao();
+    pontuacaoDoPlacar.desenhaMaiorPontuacao();
   },
   atualiza() {
 
@@ -371,6 +406,12 @@ function loop() {
 }
 
 window.addEventListener('click', function() {
+  if(telaAtiva.click) {
+    telaAtiva.click();
+  }
+});
+
+window.addEventListener('keydown', function() {
   if(telaAtiva.click) {
     telaAtiva.click();
   }

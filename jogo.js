@@ -2,7 +2,10 @@ console.log('[dev João] Flappy Bird');
 
 let frames = 0;
 const som_HIT = new Audio();
-som_HIT.src = './efeitos/hit.wav';
+som_HIT.src = './efeitos/caiu.wav';
+
+const som_jump = new Audio();
+som_jump.src = './efeitos/pulo.wav';
 
 const sprites = new Image();
 sprites.src = './sprites.png';
@@ -95,6 +98,7 @@ function criarFlappyBird() {
     y: 50,
     pulo: 4.6,
     pula() {
+      som_jump.play();
       flappyBird.velocidade = - flappyBird.pulo;
     },
     gravidade: 0.25,
@@ -272,7 +276,7 @@ function criaCanos() {
       spriteX: 52,
       spriteY: 169,
     },
-    espaco: 80,
+    espaco: 100,
 
     desenha() {
 

@@ -282,7 +282,14 @@ function criaCanos() {
 
       canos.pares.forEach(function(par) {
         const yRandom = par.y;
-        const espacamentoEntreCanos = 90;
+        let espacamentoEntreCanos = 150;
+        if(globais.placar.pontuacao > 32 && globais.placar.pontuacao < 79){
+          espacamentoEntreCanos = 125;
+        }
+
+        if(globais.placar.pontuacao > 80){
+          espacamentoEntreCanos = 90;
+        }
   
         const canoCeuX = par.x;
         const canoCeuY = yRandom;
@@ -335,11 +342,21 @@ function criaCanos() {
     pares: [],
     atualiza() {
       const passou100Frames = frames % 100 === 0;
+
+      if(globais.placar.pontuacao > 14) {
+        console.log(passou100Frames);
+      }
       if(passou100Frames) {
-        canos.pares.push({
-          x: canvas.width,
-          y: -150 * (Math.random() + 1),
-        });
+        if(
+          !(globais.placar.pontuacao > 20) ||
+          (globais.placar.pontuacao > 28 && globais.placar.pontuacao < 60) ||
+          (globais.placar.pontuacao > 80)
+          ) {
+          canos.pares.push({
+            x: canvas.width,
+            y: -150 * (Math.random() + 1),
+          });
+        }
       }
 
       canos.pares.forEach(function(par) {
